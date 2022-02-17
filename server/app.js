@@ -1,9 +1,14 @@
 const express = require("express");
 const app = express();
 const StudentRoute = require("./router/student");
-
-
-app.use(StudentRoute);
+const companyRoute = require("./router/company");
+const connectDB = require('./config/db')
+require('dotenv').config()
+connectDB()
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+app.use('/api/student',StudentRoute);
+// app.use('/api/company',companyRoute);
 
 app.get("/",(req,res)=>{
     res.json("home page");
