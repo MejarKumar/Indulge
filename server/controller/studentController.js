@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const asyncHandler = require('express-async-handler')
 const User= require("../model/student/student")
+const Branch = require('../model/Branch')
+const Course = require('../model/course')
   //===============Register Student==================
 const registerUser = asyncHandler(async (req, res) => {
     const {  admNo, password } = req.body
@@ -64,9 +66,21 @@ const registerUser = asyncHandler(async (req, res) => {
     })
   }
   
-  module.exports = {
-    registerUser,
-    loginUser,
-    
-  }
+
 //===================Generate Token===============
+
+
+const UserProfile=asyncHandler(async(req,res)=>{
+ const admNo= req.params.admNo;
+  const branch=req.body.branch;
+  const user =   await User.findOne({admNo}).populate("branch");
+  console.log(user)
+  res.json(user);
+})
+
+
+module.exports = {
+  registerUser,
+  loginUser,
+  UserProfile
+}
