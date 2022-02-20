@@ -11,6 +11,15 @@ const hrSchema = mongoose.Schema({
     email:{
         type:String,
         reqired:true,
+        unique:true
+    },
+    password:{
+        type:String,
+        reqired:true,
+    },
+    company:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Company"
     }
 })
 

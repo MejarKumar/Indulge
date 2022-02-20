@@ -18,16 +18,13 @@ const StudentSchema = mongoose.Schema({
         // reqired:true,
     },
     branch:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Branch'
+        type:String,
     },
     department:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Department'
+        type:String,
     },
     course:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Course'
+        type:String,
     },
     cgpa:{
         type:String,

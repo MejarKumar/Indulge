@@ -12,10 +12,6 @@ const companySchema = mongoose.Schema({
         type:String,
         reqired:true,
     },
-    hr_details:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"HrDetails"
-    },
     job:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Job"
