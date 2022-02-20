@@ -9,6 +9,7 @@ const StudentSchema = mongoose.Schema({
         reqired:true,
         unique:true,
     },
+
     password:{
         type:String,
         reqired:true,
@@ -34,4 +35,4 @@ const StudentSchema = mongoose.Schema({
         ref:'Course'
     },
 });
-module.exports = mongoose.model('User', StudentSchema)
+module.exports = mongoose.model('Student', StudentSchema)

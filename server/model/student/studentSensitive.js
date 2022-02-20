@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const StudentSchema = mongoose.Schema({
+const StudentSensitiveSchema = mongoose.Schema({
     cgpa:{
         type:String,
         reqired:true
@@ -25,4 +25,4 @@ const StudentSchema = mongoose.Schema({
         required:true
     }
 });
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model('Student_Sensitive', StudentSensitiveSchema)

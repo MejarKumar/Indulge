@@ -19,6 +19,7 @@ async function fileExist(path){
 router.post('/login',loginUser)
 router.post('/register',registerUser)
 router.put("/profile/:admNo",UserProfile);
+//================================================
 router.post("/add",async(req,res)=>{
     const department  = req.body.department;
     const newDep = new Department({
@@ -28,6 +29,7 @@ router.post("/add",async(req,res)=>{
     await newDep.save();
     res.json(newDep);
 })
+//================================================
 
 const fileStorageEngine=multer.diskStorage({
     destination:(req,file,cb)=>{
