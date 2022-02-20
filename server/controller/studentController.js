@@ -2,9 +2,11 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const asyncHandler = require('express-async-handler')
 const Student_Credential= require("../model/student/credential")
+const Student= require("../model/student/student")
 const Branch = require('../model/Branch')
 const Course = require('../model/course')
-  //===============Register Student==================
+  //===============Register Student===============
+
 const registerUser = asyncHandler(async (req, res) => {
     const {  admNo, password } = req.body
   
@@ -72,12 +74,12 @@ const registerUser = asyncHandler(async (req, res) => {
 
 const UserProfile=asyncHandler(async(req,res)=>{
   const admNo=req.params.admNo
-  const {branch, course,department,email,phnNo,name} =req.body
-   await Student_Credential.findOneAndUpdate({admNo},{branch,course,department,email,name,phnNo})
-
-  const user =   await Student_Credential.findOne({admNo});
-  console.log(user.branch)
-  res.json(user);
+  const {branch, course,department,email,phnNo,name,cgpa,skills,socialLinks,experience} =req.body
+  const newStudent=new Student({
+    admNo,branch,course,department,email,name,phnNo,cgpa,skills,socialLinks,experience
+  })
+  await newStudent.save()
+  res.json(newStudent);
 })
 
 

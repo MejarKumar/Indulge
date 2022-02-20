@@ -9,11 +9,6 @@ const StudentSchema = mongoose.Schema({
         reqired:true,
         unique:true,
     },
-
-    password:{
-        type:String,
-        reqired:true,
-    },
     phnNo:{
         type:String,
         // reqired:true,
@@ -34,5 +29,21 @@ const StudentSchema = mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'Course'
     },
+    cgpa:{
+        type:String,
+        reqired:true
+    },
+    skills:{
+        type:String,
+        required:true
+    },
+    socialLinks:{
+        type:String,
+        required:true
+    },
+    experience:{
+        type:String,
+        required:true
+    }
 });
 module.exports = mongoose.model('Student', StudentSchema)

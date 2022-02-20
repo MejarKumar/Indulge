@@ -15,22 +15,6 @@ async function fileExist(path){
 }
 
 
-
-router.post('/login',loginUser)
-router.post('/register',registerUser)
-router.put("/profile/:admNo",UserProfile);
-//================================================
-router.post("/add",async(req,res)=>{
-    const department  = req.body.department;
-    const newDep = new Department({
-        department
-    })
-
-    await newDep.save();
-    res.json(newDep);
-})
-//================================================
-
 const fileStorageEngine=multer.diskStorage({
     destination:(req,file,cb)=>{
         if(fileExist(`./cv/${req.params.admNo}.pdf`))
@@ -49,9 +33,25 @@ const fileStorageEngine=multer.diskStorage({
 
 const upload =multer({storage:fileStorageEngine})
 
-router.post("/cv/:admNo",upload.single('cv'),(req,res)=>{
-res.send(req.file)
+router.post('/login',loginUser)
+router.post('/register',registerUser)
+router.put("/profile/:admNo",upload.single('cv'),UserProfile);
+//================================================
+router.post("/add",async(req,res)=>{
+    const department  = req.body.department;
+    const newDep = new Department({
+        department
+    })
+
+    await newDep.save();
+    res.json(newDep);
 })
+//================================================
+
+
+// router.post("/cv/:admNo",upload.single('cv'),(req,res)=>{
+// res.send(req.file)
+// })
 
 router.get("/cv/:admNo",(req,res)=>{
     res.download(`./cv/${req.params.admNo}.pdf`)
