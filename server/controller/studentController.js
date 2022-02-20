@@ -71,10 +71,12 @@ const registerUser = asyncHandler(async (req, res) => {
 
 
 const UserProfile=asyncHandler(async(req,res)=>{
- const admNo= req.params.admNo;
-  const branch=req.body.branch;
-  const user =   await User.findOne({admNo}).populate("branch");
-  console.log(user)
+  const admNo=req.params.admNo
+  const {branch, course,department,email,phnNo,name} =req.body
+   await User.findOneAndUpdate({admNo},{branch,course,department,email,name,phnNo})
+
+  const user =   await User.findOne({admNo}).populate("branch").populate("department").populate("course");
+  console.log(user.branch)
   res.json(user);
 })
 
