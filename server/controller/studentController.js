@@ -1,90 +1,52 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const asyncHandler = require('express-async-handler')
-const Student_Credential= require("../model/student/credential")
 const Student= require("../model/student/student")
 const Branch = require('../model/Branch')
 const Course = require('../model/course')
-  //===============Register Student===============
-
-const registerUser = asyncHandler(async (req, res) => {
-    const {  admNo, password } = req.body
-  
-    if ( !admNo || !password) {
-      res.status(400)
-      throw new Error('Please add all fields')
-    }
-  
-    const userExists = await Student_Credential.findOne({ admNo })
-  
-    if (userExists) {
-      res.status(400)
-      throw new Error('User already exists')
-    }
-  
-    const salt = await bcrypt.genSalt(10)
-    const hashedPassword = await bcrypt.hash(password, salt)
-    const user = await Student_Credential.create({
-      admNo,
-      password: hashedPassword,
-    })
-  
-    if (user) {
-      res.status(201).json({
-        _id: user.id,
-        admNo: user.admNo,
-        token: generateToken(user._id),
-      })
-    } else {
-      res.status(400)
-      throw new Error('Invalid user data')
-    }
-  })
-  //===============Register Student===============
-
-  //===============Login Student==================
-  const loginUser = asyncHandler(async (req, res) => {
-    const { admNo, password } = req.body
-    const user = await Student_Credential.findOne({ admNo })
-  
-    if (user && (await bcrypt.compare(password, user.password))) {
-      res.json({
-        _id: user.id,
-        admNo: user.admNo,
-        token: generateToken(user._id),
-      })
-    } else {
-      res.status(400)
-      throw new Error('Invalid credentials')
-    }
-  })
-  
-  //===============Login Student==================
-
-  //===================Generate Token=============
-  const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, {
-      expiresIn: '30d',
-    })
-  }
-  
-
-//===================Generate Token===============
+const Job= require("../model/company/job")
 
 
 const UserProfile=asyncHandler(async(req,res)=>{
-  const admNo=req.params.admNo
+  const username=req.params.username
   const {branch, course,department,email,phnNo,name,cgpa,skills,socialLinks,experience} =req.body
   const newStudent=new Student({
-    admNo,branch,course,department,email,name,phnNo,cgpa,skills,socialLinks,experience
+    username,branch,course,department,email,name,phnNo,cgpa,skills,socialLinks,experience
   })
   await newStudent.save()
   res.json(newStudent);
 })
 
 
+const getAllJobs=async(req,res)=>{
+const jobs=await  Job.find({})
+res.json({jobs})
+}
+
+
+const getJob=async(req,res)=>{
+  const id=req.params.id;
+  const job=await Job.findById(id);
+  res.send(job);
+}
+
+const apply=async(req,res)=>{
+   const jobId=req.params.id
+   const userId=req.user._id
+  try{
+
+    await Job.findOneAndUpdate({_id:jobId},{$addToSet:{appliedStudents:userId }})
+    await Student.findOneAndUpdate({_id:userId},{   $addToSet:{appliedJobs:jobId }})
+
+    res.status(200).json({message:"Applied successfully"})
+  }catch(err){
+    res.status(404).json({message:"Something went wrong"})
+  }
+}
+
 module.exports = {
-  registerUser,
-  loginUser,
-  UserProfile
+  UserProfile,
+  getAllJobs,
+  getJob,
+  apply
 }

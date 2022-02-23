@@ -1,5 +1,9 @@
 const mongoose = require("mongoose");
 const hrSchema = mongoose.Schema({
+    username:{
+        type:String,
+        reqired:true,
+    },
     name:{
         type:String,
         reqired:true,
@@ -12,10 +16,6 @@ const hrSchema = mongoose.Schema({
         type:String,
         reqired:true,
         unique:true
-    },
-    password:{
-        type:String,
-        reqired:true,
     },
     company:{
         type:mongoose.Schema.Types.ObjectId,

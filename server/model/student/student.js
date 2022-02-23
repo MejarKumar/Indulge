@@ -4,7 +4,7 @@ const StudentSchema = mongoose.Schema({
         type:String,
         // reqired:true,
     },
-    admNo:{
+    username:{
         type:String,
         reqired:true,
         unique:true,
@@ -41,6 +41,8 @@ const StudentSchema = mongoose.Schema({
     experience:{
         type:String,
         required:true
-    }
+    },
+    appliedJobs:[{job:{type:mongoose.Schema.Types.ObjectId, unique:true},status:{type:Boolean,default:false,reqired:true}}],
+
 });
 module.exports = mongoose.model('Student', StudentSchema)
