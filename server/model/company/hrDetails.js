@@ -20,7 +20,11 @@ const hrSchema = mongoose.Schema({
     company:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Company"
-    }
+    },
+    jobs:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Job"
+    }]
 })
 
 module.exports = mongoose.model('HrDetails', hrSchema)

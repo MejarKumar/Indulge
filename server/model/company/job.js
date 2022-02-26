@@ -1,5 +1,14 @@
 const mongoose = require("mongoose");
 const jobSchema = mongoose.Schema({
+    companyDetails:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Company"
+    },
+    type:{
+        type:String,
+        reqired:true,
+        enum:["JNF","INF"]
+    },
     profile:{
         type:String,
         reqired:true,

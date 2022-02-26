@@ -12,9 +12,9 @@ const companySchema = mongoose.Schema({
         type:String,
         reqired:true,
     },
-    job:{
+    jobs:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Job"
-    }
+    }]
 });
 module.exports = mongoose.model('Company', companySchema)

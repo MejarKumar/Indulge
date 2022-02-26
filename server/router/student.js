@@ -2,12 +2,12 @@ const express=require("express");
 const Department = require("../model/department");
 const { UserProfile, getAllJobs, getJob, apply } = require("../controller/studentController");
 const {login,register} = require("../controller/auth");
-const router = express.Router();
 const multer= require("multer")
 const fs=require("fs");
 const { verifyToken } = require("../middleware/verifyToken");
 const Job = require("../model/company/job");
 const Student = require("../model/student/student");
+const router = express.Router();
 
 async function fileExist(path){
     try{

@@ -1,24 +1,26 @@
-const roles=['student','admin','coordinator','hr']
+const roles=['STUDENT','ADMIN','COORDINATOR','HR']
 
 const studentRole=(req,res,next)=>{
     const {role}=req.user
-    if(role=="student") next()
+    if(role=="STUDENT") next()
     else res.send("unauthorised")
 }
 
 const hrRole=(req,res,next)=>{
     const {role}=req.user
-    if(role=="hr") next()
+    if(role=="HR") next()
     else res.send("unauthorised")
 }
 const adminRole=(req,res,next)=>{
     const {role}=req.user
-    if(role=="admin") next()
+    if(role=="ADMIN") next()
     else res.send("unauthorised")
 }
 
 const coordinatorRole=(req,res,next)=>{
     const {role}=req.user
-    if(role=="coordinator") next()
+    if(role=="COORDINATOR") next()
     else res.send("unauthorised")
 }
+
+module.exports={studentRole,hrRole,coordinatorRole,adminRole}
