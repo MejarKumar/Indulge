@@ -42,7 +42,7 @@ const StudentSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    appliedJobs:[{job:{type:mongoose.Schema.Types.ObjectId, unique:true},status:{type:Boolean,default:false,reqired:true}}],
+    appliedJobs:[{job:{type:mongoose.Schema.Types.ObjectId,ref:"Job", unique:true},status:{type:Boolean,default:false,reqired:true}}],
 
 });
 module.exports = mongoose.model('Student', StudentSchema)

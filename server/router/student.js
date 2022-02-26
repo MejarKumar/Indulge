@@ -1,7 +1,8 @@
 const express=require("express");
 const Department = require("../model/department");
-const { UserProfile, getAllJobs, getJob, apply } = require("../controller/studentController");
+const { UserProfile, getAllJobs, getJob, apply,getMyProfile } = require("../controller/studentController");
 const {login,register} = require("../controller/auth");
+const {studentRole} =require("../controller/roleController")
 const multer= require("multer")
 const fs=require("fs");
 const { verifyToken } = require("../middleware/verifyToken");
@@ -40,12 +41,12 @@ const upload =multer({storage:fileStorageEngine})
 router.post('/login',login)
 router.post('/register',register)
 router.get('/protected',verifyToken,(req,res)=>{res.json({message:"yeh u get through protected route"})})
-
+router.get("/profile/:username",verifyToken,studentRole,getMyProfile)
 router.put("/profile/:username",upload.single('cv'),UserProfile);
 //================================================
 router.post("/add",async(req,res)=>{
     // const department  = req.body.department;
-    const newStudent = new Student({
+    const newStudent = new Job({
         name:"raman",
         username:"ramaan sain",
         phnNo:"7654447454",
@@ -70,12 +71,12 @@ router.post("/add",async(req,res)=>{
 // res.send(req.file)
 // })
 
-router.get("/cv/:username",(req,res)=>{
+router.get("/cv/:username",verifyToken,studentRole,(req,res)=>{
     res.download(`./cv/${req.params.username}.pdf`)
 })
 
 module.exports = router;
 
-router.get("/allJobs",getAllJobs)
-router.get("/job/:id",getJob)
-router.post("/job/apply/:id",apply)
+router.get("/allJobs",verifyToken,studentRole,getAllJobs)
+router.get("/job/:jobId",verifyToken,studentRole,getJob)
+router.post("/job/apply/:jobId",verifyToken,studentRole,apply)

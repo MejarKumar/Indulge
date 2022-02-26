@@ -25,28 +25,48 @@ res.json({jobs})
 
 
 const getJob=async(req,res)=>{
-  const id=req.params.id;
+  const id=req.params.jobId;
   const job=await Job.findById(id);
   res.send(job);
 }
 
 const apply=async(req,res)=>{
-   const jobId=req.params.id
-   const userId=req.user._id
+   const jobId=req.params.jobId
+   const user=req.user.username
   try{
-
-    await Job.findOneAndUpdate({_id:jobId},{$addToSet:{appliedStudents:userId }})
-    await Student.findOneAndUpdate({_id:userId},{   $addToSet:{appliedJobs:jobId }})
+   
+    let job= await Job.findOne({_id:jobId})
+    let student=await Student.findOne({username:user})
+    job.appliedStudents.addToSet({student:student._id,status:false})
+    job.save();
+    student.appliedJobs.addToSet({job:jobId,status:false})
+    student.save();
 
     res.status(200).json({message:"Applied successfully"})
   }catch(err){
+    console.log(err)
     res.status(404).json({message:"Something went wrong"})
   }
+}
+
+const getMyProfile=async(req,res)=>{
+  if(req.user.username!==req.params.username)
+  {
+    res.send("not authorised")
+  }
+  const myProfile=await Student.findOne({username:req.user.username});
+
+  if(!myProfile)
+  {
+    res.send("update your profile")
+  }
+  res.status(200).json({profile:myProfile})
 }
 
 module.exports = {
   UserProfile,
   getAllJobs,
   getJob,
-  apply
+  apply,
+  getMyProfile
 }

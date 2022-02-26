@@ -56,7 +56,7 @@ const jobSchema = mongoose.Schema({
     finalNote:{
         type:String,
     },
-    appliedStudents:[{student:{type:mongoose.Schema.Types.ObjectId, unique:true},status:{type:Boolean,default:false,required:true}}]
+    appliedStudents:[{student:{type:mongoose.Schema.Types.ObjectId,ref:"Student"},status:{type:Boolean,default:false,required:true}}]
 })
 
 module.exports = mongoose.model('Job', jobSchema)

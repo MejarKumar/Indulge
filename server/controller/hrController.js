@@ -4,13 +4,13 @@ const asyncHandler = require('express-async-handler')
 const Company=require("../model/company/companyDetail")
 const HR=require("../model/company/hrDetails")
 const Job = require('../model/company/job')
-
+const Student=require("../model/student/student")
 
 const addCompanyDetails=async(req,res)=>{
-const {name,phnNo,email,companyName,companyCategory,websiteLink}=req.body
+const {name,phnNo,email,companyCategory,websiteLink}=req.body
 
 const newCompany =await Company.create({
-    name:companyName,
+    name:name,
     category:companyCategory,
     website:websiteLink
 })
@@ -21,14 +21,14 @@ const newCompany =await Company.create({
         email,
         company:newCompany._id
     })
-    res.status(200).json({message:"successfully added details",hr:nweHr,company:newCompany})
+    res.status(200).json({message:"successfully added details",hr:newHr,company:newCompany})
 
 }
 
 
 const addJob=async(req,res)=>{
 
-    const hr=await HR.findOne({username:req.user.username})
+    let hr=await HR.findOne({username:req.user.username})
     if(!hr)
     {
         res.status(404).json({message:"not authorised"})
@@ -52,7 +52,6 @@ const addJob=async(req,res)=>{
         otherQualificationRounds,
         finalNote
     }=req.body
-
     if(!type || !profile || !description|| !eligible_branch|| !cutOffGpa|| !ctc|| !placeOfPosting|| !tenure|| !skillsRequired|| !resumeShortlisting|| !typeOfTest|| !otherQualificationRounds|| !finalNote)
     {
         return res.send("all fields are required")
@@ -80,6 +79,93 @@ const addJob=async(req,res)=>{
 }
 
 
+const getAllJobs=async(req,res)=>{
+
+    const hr=await HR.findOne({username:req.user.username})
+    if(!hr)
+    {
+        res.status(404).json({message:"not authorised"})
+    }
+
+    res.status(200).json({jobs:hr.jobs})
+
+}
+
+const getApplicants=async(req,res)=>{
+
+    const jobId=req.params.jobId;
+    const hr=await HR.findOne({username:req.user.username})
+    if(!hr)
+    {
+    return res.send("Hr Not Found");
+    }
+    function findJobId(element){
+        return element.toString()===jobId
+    }
+   const id= hr.jobs.find(findJobId)
+    if(id){
+        const job =await Job.findOne({_id:jobId});
+        res.status(200).json({job});
+    }
+    else{
+        res.send("No Applicants");
+    }
+    
+
+}
+
+const getApplicant=async(req,res)=>{
+
+    const jobId=req.params.jobId;
+    const studentId=req.params.studentId;
+    const job=await Job.findOne({_id:jobId});
+    if(!job)
+    {
+        res.send("Not Found");
+    }
+    function findApplicantId(element){
+        return element.student.toString()===studentId
+    }
+    const id= job.appliedStudents.find(findApplicantId)
+    if(id){
+        const student=await Student.findOne({_id:studentId});
+        res.status(200).json({student});
+    }
+    else{
+        res.send("No Applicants");
+    }
+
+}
+const getApplicantCv=async(req,res)=>{
+    const jobId=req.params.jobId;
+    const studentId=req.params.studentId;
+    const job=await Job.findOne({_id:jobId});
+    if(!job)
+    {
+        res.send("Not Found");
+    }
+    function findApplicantId(element){
+        return element.student.toString()===studentId
+    }
+    const id= job.appliedStudents.find(findApplicantId)
+    if(id){
+        const student=await Student.findOne({_id:studentId});
+        res.download(`./cv/${student.username}.pdf`)
+    }
+    else{
+        res.send("No Applicants");
+    }
+}
+
+const getMyProfile=async(req,res)=>{
+const hr= await HR.findOne({username:req.user.username});
+if(!hr)
+{
+    res.send("Not Found");
+}
+
+res.status(200).json({profile:hr});
+}
 
 
 
@@ -89,4 +175,4 @@ const addJob=async(req,res)=>{
 
 
 
-module.exports={addCompanyDetails,addJob}
+module.exports={addCompanyDetails,addJob,getAllJobs,getApplicants,getApplicant,getApplicantCv}
