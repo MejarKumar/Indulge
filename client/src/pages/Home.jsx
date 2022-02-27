@@ -1,5 +1,18 @@
 import React from "react";
-
+import styles from "./Footer.module.css";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCopyright,
+  faEnvelope,
+  faPhone,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  faInstagram,
+  faFacebook,
+  faTwitter,
+  faLinkedin,
+} from "@fortawesome/free-brands-svg-icons";
 export default function Home() {
   return (
     <>
@@ -19,7 +32,6 @@ export default function Home() {
 
         <div className="flex flex-row w-6/12 container p-6">
           <div className="bg-black w-3000000/12 px-5 mx-4">
-              
             <img src="" alt="" />
           </div>
           <div className="flex w-6/12 items-start ">
@@ -33,24 +45,158 @@ export default function Home() {
 
       <div className=" flex flex-col  w-screen bg-black h-auto">
         <div>
-        <h1 className= "px-2 mt-48 text-4xl text-white">Placement Season 2021-2022 at Glance </h1>
+          <h1 className="px-2 mt-48 text-4xl text-white">
+            Placement Season 2021-2022 at Glance{" "}
+          </h1>
         </div>
-        <div className="flex flex-wrap items-end p-3 justify-center w-screen h-[100%]">
-        <div className="w-56 h-28 rounded-lg bg-white m-3">
-
-        </div>
-        <div className="w-56 h-28 rounded-lg bg-white m-3">
-
-        </div>
-        <div className="w-56 h-28 rounded-lg bg-white m-3">
-
-        </div>
-        <div className="w-56 h-28 rounded-lg bg-white m-3">
-
-        </div>
+        <div className="flex flex-wrap items-end p-3 justify-center w-12/12 h-[100%]">
+          <div className="w-56 h-28 rounded-lg bg-white m-3"></div>
+          <div className="w-56 h-28 rounded-lg bg-white m-3"></div>
+          <div className="w-56 h-28 rounded-lg bg-white m-3"></div>
+          <div className="w-56 h-28 rounded-lg bg-white m-3"></div>
         </div>
       </div>
 
+      {/* footer section 
+    <div className="container p-4 flex flex-row w-12/12">
+      <div className="container flex flex-col w-3/12" >
+        <div className="flex flex-row">
+          <div className="flex w-4/12">
+            <img className="bg-black w-10/12" src="" alt="" />
+          </div>
+          <div className="flex flex-col w-4/12">
+            <h2>IIT</h2>
+            <p>ISM</p>
+          </div>
+          <div className="flex flex-col w-4/12">
+            <p>Indian Institute of Technology</p>
+            <p>Indian School of Mines</p>
+            <p>Dhanbad</p>
+          </div>
+        </div>
+        <div className="flex">1</div>
+      </div>
+      <div className="container flex flex-row w-3/12">2</div>
+      <div className="container flex flex-row w-3/12">3</div>
+      <div className="container flex flex-row w-3/12">4</div>
+    </div> */}
+
+      <div className={styles.container}>
+        <div className={styles.logo}>logo</div>
+        <div className={styles.address}>
+        <p className="px-10 my-3 text-left ">
+              Police Line Road , Main Campus IIT(ISM) near Rani Bandh, Hirapur,
+              Sardar Patel Nagar, Dhanbad, Jharkhand, 826004
+            </p>
+        </div>
+        <div className={styles.social_links}>
+          <div className="flex flex-row  justify-around ">
+            <div>
+              <Link to="/login">
+                <FontAwesomeIcon className="text-3xl" icon={faLinkedin} />
+              </Link>
+            </div>
+            <div>
+              <Link to="/login">
+                <FontAwesomeIcon className="text-3xl" icon={faInstagram} />
+              </Link>
+            </div>
+            <div>
+              <Link to="/login">
+              
+                <FontAwesomeIcon className="text-3xl" icon={faFacebook} />
+              </Link>
+            </div>
+            <div>
+              <Link to="/login">
+               
+                <FontAwesomeIcon className="text-3xl" icon={faTwitter} />
+              </Link>
+            </div>
+          </div>
+        </div>
+        <div className={styles.useful_links}>
+          <h1 className="text-xl font-semibold text-left my-3 ">
+            Useful Links
+          </h1>
+        </div>
+        <div className={styles.useful_links_link}>
+          <ul className="text-left">
+            <li>
+              {" "}
+              <Link to="/login">Departments</Link>
+            </li>
+            <li>
+              {" "}
+              <Link to="/login">Administration</Link>
+            </li>
+            <li>
+              {" "}
+              <Link to="/login">Placement Policies</Link>
+            </li>
+            <li>
+              {" "}
+              <Link to="/login">Know Dhanbad</Link>
+            </li>
+            <li>
+              {" "}
+              <Link to="/login">Know About Dhanbad</Link>
+            </li>
+          </ul>
+        </div>
+        <div className={styles.direct_links}>
+          <h1 className="text-xl font-semibold text-left my-3 ">
+            Direct Links
+          </h1>
+        </div>
+        <div className={styles.direct_links_link}>
+          <ul className="text-left">
+            <li>
+              {" "}
+              <Link to="/login">IIT(ISM) Home</Link>
+            </li>
+            <li>
+              {" "}
+              <Link to="/login">Recruitment Portal</Link>
+            </li>
+            <li>
+              {" "}
+              <Link to="/login">Recruitment Process</Link>
+            </li>
+            <li>
+              {" "}
+              <Link to="/login">Alumni Affairs Home</Link>
+            </li>
+            <li>
+              {" "}
+              <Link to="/login">Past Recruiters</Link>
+            </li>
+          </ul>
+        </div>
+        <div className={styles.contact}>
+          <div className="container py-4 my-4 px-4">
+            <div className="border-2 rounded-lg w-fit my-4 border-gray-900">
+              <p className="p-2">Contact Us</p>
+            </div>
+            <div className="container flex flex-row justify-start items-center my-3">
+              <FontAwesomeIcon icon={faPhone} />
+              <p className="px-4">7512409732</p>
+            </div>
+            <div className="container flex flex-row justify-start items-center my-3">
+              <FontAwesomeIcon icon={faEnvelope} />
+              <p className="px-4">cdc@gmail.com</p>
+            </div>
+            <div className="container flex flex-row text-left justify-between my-3">
+              <p>Terms and Conditions</p>
+              <p>Privacy Policy</p>
+            </div>
+            <p>
+              <FontAwesomeIcon icon={faCopyright} /> 2022 | Indian Institute of
+              Technology (Indian School of Mines), Dhanbad
+            </p>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
