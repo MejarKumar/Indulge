@@ -30,18 +30,18 @@ const StudentSchema = mongoose.Schema({
         type:String,
         reqired:true
     },
-    skills:{
-        type:String,
-        required:true
-    },
-    socialLinks:{
-        type:String,
-        required:true
-    },
-    experience:{
-        type:String,
-        required:true
-    },
+    // skills:{
+    //     type:String,
+    //     required:true
+    // },
+    // socialLinks:{
+    //     type:String,
+    //     required:true
+    // },
+    // experience:{
+    //     type:String,
+    //     required:true
+    // },
     appliedJobs:[{job:{type:mongoose.Schema.Types.ObjectId,ref:"Job", unique:true},status:{type:Boolean,default:false,reqired:true}}],
 
 });

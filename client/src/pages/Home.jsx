@@ -15,6 +15,7 @@ import {
   faTwitter,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
+import HeaderMenu from "../components/home/HeaderMenu";
 export default function Home() {
   return (
     <>
@@ -44,6 +45,13 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+
+    <HeaderMenu />
+
+
+
+
 
       <div className=" flex flex-col  w-screen bg-black h-auto">
         <div>
