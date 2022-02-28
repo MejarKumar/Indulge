@@ -3,6 +3,8 @@ import styles from "./Footer.module.css";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faArrowAltCircleDown,
+  faArrowDown,
   faCopyright,
   faEnvelope,
   faPhone,
@@ -57,37 +59,87 @@ export default function Home() {
         </div>
       </div>
 
-      {/* footer section 
-    <div className="container p-4 flex flex-row w-12/12">
-      <div className="container flex flex-col w-3/12" >
-        <div className="flex flex-row">
-          <div className="flex w-4/12">
-            <img className="bg-black w-10/12" src="" alt="" />
+      <div className="container p-2 flex justify-center items-center  ">
+        <p className="border-2 rounded-lg bg-red-600 text-slate-100 p-2 ">
+          Download Placement Brochure{" "}
+          <FontAwesomeIcon className="mx-2" icon={faArrowAltCircleDown} />
+        </p>
+      </div>
+
+      <div className="container px-32  flex flex-row justify-around   ">
+        <div className="container mx-2 border-2  rounded-lg  bg-blue-900">
+          <div className="container pl-16 py-4">
+            <h2 className="border-l-4 border-red-600 text-white font-semibold px-5 text-xl ">
+              Message from Director
+            </h2>
           </div>
-          <div className="flex flex-col w-4/12">
-            <h2>IIT</h2>
-            <p>ISM</p>
-          </div>
-          <div className="flex flex-col w-4/12">
-            <p>Indian Institute of Technology</p>
-            <p>Indian School of Mines</p>
-            <p>Dhanbad</p>
+          <div className="container flex flex-row">
+            <div className="container flex items-center justify-center">
+              <img
+                className="w-3/5 "
+                src="https://th.bing.com/th/id/OIP.YicYNho-iBJZORWl7BVG1gHaJh?pid=ImgDet&rs=1"
+                alt=""
+              />
+            </div>
+            <div className="container text-white text-left px-4 my-4">
+              <p className="font-semibold my-2">Prof. Rajiv Shekhar</p>
+              <p className="font-light">
+                <span>Dear Recruiter(s)</span> <br />
+                It gives me immense pleasure to take this opportunity to invite
+                you to the program at Indian Institute of Technology(Indian
+                School of Mines), Dhanbad The time has come again for us to
+                exhibit our best minds to the world.Together.......
+              </p>
+              <div className="container flex justify-end  my-3 ">
+              <p className=" border-2 rounded-sm w-fit p-1 text-sm cursor-pointer bg-white text-black ">Read More... </p>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="flex">1</div>
+        <div className="container mx-2 border-2 rounded-lg bg-blue-900">
+          <div className="container pl-16 py-4 ">
+            <h2 className="border-l-4 border-red-600 text-white font-semibold px-5 text-xl ">
+              Message from PIC
+            </h2>
+          </div>
+          <div className="container flex flex-row">
+            <div className="container flex items-center justify-center">
+              <img
+                className="w-3/5 "
+                src="https://th.bing.com/th/id/OIP.YicYNho-iBJZORWl7BVG1gHaJh?pid=ImgDet&rs=1"
+                alt=""
+              />
+            </div>
+            <div className="container text-white text-left px-4 my-4">
+              <p className="font-semibold my-2">Prof. Rajiv Shekhar</p>
+              <p className="font-light">
+                <span>Dear Recruiter(s)</span> <br />
+                It gives me immense pleasure to take this opportunity to invite
+                you to the program at Indian Institute of Technology(Indian
+                School of Mines), Dhanbad The time has come again for us to
+                exhibit our best minds to the world.Together.......
+              </p>
+              <div className="container flex justify-end  my-3 ">
+              <p className=" border-2 rounded-sm w-fit p-1 text-sm cursor-pointer bg-white text-black ">Read More... </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
       </div>
-      <div className="container flex flex-row w-3/12">2</div>
-      <div className="container flex flex-row w-3/12">3</div>
-      <div className="container flex flex-row w-3/12">4</div>
-    </div> */}
+      <br />
+      <br />
+      <br />
+      <br />
 
+      {/* footer */}
       <div className={styles.container}>
         <div className={styles.logo}>logo</div>
         <div className={styles.address}>
-        <p className="px-10 my-3 text-left ">
-              Police Line Road , Main Campus IIT(ISM) near Rani Bandh, Hirapur,
-              Sardar Patel Nagar, Dhanbad, Jharkhand, 826004
-            </p>
+          <p className="px-10 my-3 text-left ">
+            Police Line Road , Main Campus IIT(ISM) near Rani Bandh, Hirapur,
+            Sardar Patel Nagar, Dhanbad, Jharkhand, 826004
+          </p>
         </div>
         <div className={styles.social_links}>
           <div className="flex flex-row  justify-around ">
@@ -103,13 +155,11 @@ export default function Home() {
             </div>
             <div>
               <Link to="/login">
-              
                 <FontAwesomeIcon className="text-3xl" icon={faFacebook} />
               </Link>
             </div>
             <div>
               <Link to="/login">
-               
                 <FontAwesomeIcon className="text-3xl" icon={faTwitter} />
               </Link>
             </div>
