@@ -6,17 +6,27 @@ import  Login from './pages/Login';
 import Protected from "./pages/Protected"
 import StudentDashboard from './pages/StudentDashboard';
 import ProfileUpdateForm from './pages/ProfileUpdateForm';
+import AllCompanies from './components/StudentDashboard/AllCompanies';
+import Profile from './components/StudentDashboard/Profile';
+import AppliedJobs from './components/StudentDashboard/AppliedJobs';
 function App() {
   return (
     <div className="App">
 
       <Router>
         <Routes>
-          <Route exact path='/home' element={<Home />} />
-          <Route exact path='/login' element={<Login/>} />
-          <Route exact path='/studentdashboard' element={<StudentDashboard/>} />
-          <Route exact path='/protected' element={<Protected/>} />
-          <Route exact path='/update_profile' element={<ProfileUpdateForm />} />
+          
+          <Route exact path='update_profile' element={<ProfileUpdateForm />} />
+          <Route exact path='home' element={<Home />} />
+          <Route exact path='login' element={<Login/>} />
+          <Route  path='studentdashboard' element={<StudentDashboard/>} >
+              <Route  path="allCompanies" element={<AllCompanies/>}/>
+              <Route  path="appliedJobs" element={<AppliedJobs/>}/>
+              <Route  path="profile" element={<Profile/>}/>
+          </Route>
+            
+          
+          <Route exact path='protected' element={<Protected/>} />
         </Routes>
       </Router>
 

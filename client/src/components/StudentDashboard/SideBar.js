@@ -1,12 +1,14 @@
+import { NavLink } from "react-router-dom";
 import SideBarElement from "./SideBarElement";
 
 function SideBar() {
     return (
-      <div className="w-56 bg-blue-500 h-[calc(100vh-6rem)] flex flex-col content-center justify-around ">     
-          <SideBarElement>Dashboard</SideBarElement>
-          <SideBarElement>All Companies</SideBarElement>
-          <SideBarElement>My Profile</SideBarElement>
-          <SideBarElement>My Profile</SideBarElement>
+      <div className="w-56 bg-blue-500 h-[calc(100vh-6rem)] flex flex-col  "> 
+      <div className="flex flex-col  h-full">    
+          <SideBarElement><NavLink to="/studentdashboard">Dashboard</NavLink></SideBarElement>
+          <SideBarElement><NavLink to='/studentdashboard/allCompanies'>All Companies</NavLink></SideBarElement>
+          <SideBarElement><NavLink to='/studentdashboard/profile'>My Profile</NavLink></SideBarElement>
+      </div>
       </div>
     );
   }
