@@ -141,7 +141,7 @@ export default function Home() {
       <br />
 
       {/* footer */}
-      <div className={styles.container}>
+      <div className={styles.container} style={{backgroundColor:"black", color:"#F7F7F7"}}>
         <div className={styles.logo}>logo</div>
         <div className={styles.address}>
           <p className="px-10 my-3 text-left ">
@@ -180,23 +180,23 @@ export default function Home() {
         </div>
         <div className={styles.useful_links_link}>
           <ul className="text-left">
-            <li>
+            <li  className="my-2" >
               {" "}
               <Link to="/login">Departments</Link>
             </li>
-            <li>
+            <li className="my-2" >
               {" "}
               <Link to="/login">Administration</Link>
             </li>
-            <li>
+            <li className="my-2" >
               {" "}
               <Link to="/login">Placement Policies</Link>
             </li>
-            <li>
+            <li className="my-2" >
               {" "}
               <Link to="/login">Know Dhanbad</Link>
             </li>
-            <li>
+            <li className="my-2" >
               {" "}
               <Link to="/login">Know About Dhanbad</Link>
             </li>
@@ -209,23 +209,23 @@ export default function Home() {
         </div>
         <div className={styles.direct_links_link}>
           <ul className="text-left">
-            <li>
+            <li  className="my-2" >
               {" "}
               <Link to="/login">IIT(ISM) Home</Link>
             </li>
-            <li>
+            <li className="my-2" >
               {" "}
               <Link to="/login">Recruitment Portal</Link>
             </li>
-            <li>
+            <li className="my-2" >
               {" "}
               <Link to="/login">Recruitment Process</Link>
             </li>
-            <li>
+            <li className="my-2" >
               {" "}
               <Link to="/login">Alumni Affairs Home</Link>
             </li>
-            <li>
+            <li className="my-2" >
               {" "}
               <Link to="/login">Past Recruiters</Link>
             </li>
