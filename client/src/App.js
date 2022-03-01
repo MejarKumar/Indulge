@@ -9,6 +9,7 @@ import ProfileUpdateForm from './pages/ProfileUpdateForm';
 import AllCompanies from './components/StudentDashboard/AllCompanies';
 import Profile from './components/StudentDashboard/Profile';
 import AppliedJobs from './components/StudentDashboard/AppliedJobs';
+import HrDashboard from './pages/HrDashboard';
 function App() {
   return (
     <div className="App">
@@ -24,8 +25,9 @@ function App() {
               <Route  path="appliedJobs" element={<AppliedJobs/>}/>
               <Route  path="profile" element={<Profile/>}/>
           </Route>
-            
-          
+          <Route  path='hrdashboard' element={<HrDashboard/>} >
+              
+          </Route>
           <Route exact path='protected' element={<Protected/>} />
         </Routes>
       </Router>
