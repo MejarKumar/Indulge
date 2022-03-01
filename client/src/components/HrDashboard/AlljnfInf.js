@@ -1,9 +1,9 @@
 import React from 'react'
 
-function AlljnfInf() {
+function AllJnfInf() {
   return (
     <div>AlljnfInf</div>
   )
 }
 
-export default AlljnfInf
+export default AllJnfInf
