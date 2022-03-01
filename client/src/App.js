@@ -14,6 +14,7 @@ import HrDashboard from './pages/HrDashboard';
 import AddJnfInf from './components/HrDashboard/AddJnfInf';
 import AllJnfInf from './components/HrDashboard/AllJnfInf';
 import Dashboard from './components/HrDashboard/Dashboard';
+import UpdateCompanyDetails from './components/HrDashboard/UpdateCompanyDetails';
 function App() {
   return (
     <div className="App">
@@ -34,6 +35,7 @@ function App() {
             <Route  path="profile" element={<HrProfile/>}/>
             <Route  path="addJNF-INF" element={<AddJnfInf/>}/>
             <Route  path="allJNF-INF" element={<AllJnfInf/>}/>
+            <Route path='updateCompanyDetails' element={<UpdateCompanyDetails/>} />
           </Route>
           <Route exact path='protected' element={<Protected/>} />
         </Routes>
