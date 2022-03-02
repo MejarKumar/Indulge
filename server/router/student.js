@@ -40,7 +40,7 @@ const upload =multer({storage:fileStorageEngine})
 
 router.get('/protected',verifyToken,(req,res)=>{res.json({message:"yeh u get through protected route"})})
 router.get("/profile/:username",verifyToken,studentRole,getMyProfile)
-router.put("/profile/:username",upload.single('cv'),UserProfile);
+router.post("/profile/:username",upload.single('cv'),UserProfile);
 //================================================
 router.post("/add",async(req,res)=>{
     // const department  = req.body.department;

@@ -30,10 +30,10 @@ const StudentSchema = mongoose.Schema({
         type:String,
         reqired:true
     },
-    // skills:{
-    //     type:String,
-    //     required:true
-    // },
+    skills:{
+        type:String,
+        required:true
+    },
     // socialLinks:{
     //     type:String,
     //     required:true

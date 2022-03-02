@@ -14,6 +14,7 @@ import HrDashboard from './pages/HrDashboard';
 import AddJnfInf from './components/HrDashboard/AddJnfInf';
 import AllJnfInf from './components/HrDashboard/AllJnfInf';
 import Dashboard from './components/HrDashboard/Dashboard';
+import UpdateCompanyDetails from './components/HrDashboard/UpdateCompanyDetails';
 function App() {
   return (
     <div className="App">
@@ -21,16 +22,18 @@ function App() {
       <Router>
         <Routes>
           
-          <Route exact path='update_profile' element={<ProfileUpdateForm />} />
+          
           <Route exact path='home' element={<Home />} />
           <Route exact path='login' element={<Login/>} />
           <Route  path='studentdashboard' element={<StudentDashboard/>} >
+              <Route exact path='update_profile' element={<ProfileUpdateForm />} />
               <Route  path="allCompanies" element={<AllCompanies/>}/>
               <Route  path="appliedJobs" element={<AppliedJobs/>}/>
               <Route  path="profile" element={<Profile/>}/>
           </Route>
           <Route  path='hrdashboard' element={<HrDashboard/>} >
             <Route  path="" element={<Dashboard/>}/>
+            <Route  path="updateCompanyDetails" element={<UpdateCompanyDetails/>}/>
             <Route  path="profile" element={<HrProfile/>}/>
             <Route  path="addJNF-INF" element={<AddJnfInf/>}/>
             <Route  path="allJNF-INF" element={<AllJnfInf/>}/>

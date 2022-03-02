@@ -18,7 +18,14 @@ function login(username, password, role) {
             .then(
                 user => { 
                     dispatch(success(user));
-                    window.location.pathname = '/studentdashboard'
+                    if(role==='STUDENT')
+                    window.location.replace ( '/studentdashboard/update_profile')
+                    else if(role==='HR')
+                    window.location.replace ( '/hrdashboard')
+                    else if(role==='ADMIN')
+                    window.location.replace ( '/hadmindashboard')
+                    else if(role==='COORDINATOR')
+                    window.location.replace ( '/hcoordinatordashboard')
                 },
                 error => {
                     dispatch(failure(error.toString()));

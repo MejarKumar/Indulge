@@ -1,10 +1,14 @@
 const mongoose = require("mongoose");
 const companySchema = mongoose.Schema({
-   name:{
+   companyName:{
        type:String,
        reqired:true,
    },
    category:{
+    type:String,
+    reqired:true,
+   },
+   about:{
     type:String,
     reqired:true,
    },

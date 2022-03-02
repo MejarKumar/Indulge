@@ -23,7 +23,7 @@ exports.login = async (req, res, next) => {
       }
   
       const token = user.getSignedJwtToken();
-      res.status(200).json({ sucess: true, token });
+      res.status(200).json({ sucess: true, token ,username});
     } catch (err) {
         return res.status(400).json({"message":"Something went wrong"})
     }

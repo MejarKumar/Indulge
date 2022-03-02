@@ -7,12 +7,13 @@ const Job = require('../model/company/job')
 const Student=require("../model/student/student")
 
 const addCompanyDetails=async(req,res)=>{
-const {name,phnNo,email,companyCategory,websiteLink}=req.body
+const {name,phnNo,email,companyCategory,websiteLink,companyName,about}=req.body
 
 const newCompany =await Company.create({
-    name:name,
+    about,
     category:companyCategory,
-    website:websiteLink
+    website:websiteLink,
+    companyName
 })
     const newHr=await HR.create({
         username:req.user.username,
@@ -158,12 +159,13 @@ const getApplicantCv=async(req,res)=>{
 }
 
 const getMyProfile=async(req,res)=>{
-const hr= await HR.findOne({username:req.user.username});
+    
+const hr= await HR.findOne({username:req.user.username}).populate("company");
+
 if(!hr)
 {
-    res.send("Not Found");
-}
-
+    res.json({msg:"Not Found"});
+}else
 res.status(200).json({profile:hr});
 }
 
@@ -175,4 +177,4 @@ res.status(200).json({profile:hr});
 
 
 
-module.exports={addCompanyDetails,addJob,getAllJobs,getApplicants,getApplicant,getApplicantCv}
+module.exports={addCompanyDetails,addJob,getAllJobs,getApplicants,getApplicant,getApplicantCv,getMyProfile}

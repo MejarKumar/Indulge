@@ -9,9 +9,9 @@ const Job= require("../model/company/job")
 
 const UserProfile=asyncHandler(async(req,res)=>{
   const username=req.params.username
-  const {branch, course,department,email,phnNo,name,cgpa,skills,socialLinks,experience} =req.body
+  const {branch, course,department,email,phnNo,name,cgpa,skills} =req.body
   const newStudent=new Student({
-    username,branch,course,department,email,name,phnNo,cgpa,skills,socialLinks,experience
+    username,branch,course,department,email,name,phnNo,cgpa,skills
   })
   await newStudent.save()
   res.json(newStudent);
@@ -52,14 +52,15 @@ const apply=async(req,res)=>{
 const getMyProfile=async(req,res)=>{
   if(req.user.username!==req.params.username)
   {
-    res.send("not authorised")
+    res.status(403).json({msg:"not authorised"})
   }
   const myProfile=await Student.findOne({username:req.user.username});
 
   if(!myProfile)
   {
-    res.send("update your profile")
+    res.status(200).json({msg:"update your profile"})
   }
+  else
   res.status(200).json({profile:myProfile})
 }
 
