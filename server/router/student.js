@@ -1,7 +1,6 @@
 const express=require("express");
 const Department = require("../model/department");
 const { UserProfile, getAllJobs, getJob, apply,getMyProfile } = require("../controller/studentController");
-const {login,register} = require("../controller/auth");
 const {studentRole} =require("../controller/roleController")
 const multer= require("multer")
 const fs=require("fs");
@@ -38,8 +37,7 @@ const fileStorageEngine=multer.diskStorage({
 
 const upload =multer({storage:fileStorageEngine})
 
-router.post('/login',login)
-router.post('/register',register)
+
 router.get('/protected',verifyToken,(req,res)=>{res.json({message:"yeh u get through protected route"})})
 router.get("/profile/:username",verifyToken,studentRole,getMyProfile)
 router.put("/profile/:username",upload.single('cv'),UserProfile);

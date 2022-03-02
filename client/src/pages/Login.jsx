@@ -1,10 +1,9 @@
 
-import React ,{useState,useEffect} from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React ,{useState} from 'react'
 import { useNavigate } from 'react-router-dom'
-import { login, reset } from '../features/auth/authSlice'
 import Select from 'react-select'
-
+import { connect } from 'react-redux';
+import { userActions } from '../actions';
 const options = [
   { value: 'STUDENT', label: 'Student' },
   { value: 'HR', label: 'Hr' },
@@ -12,49 +11,39 @@ const options = [
   { value: 'ADMIN', label: 'Admin' },
 ]
 
+function Login(props){
+
+    const [username,setUsername]=useState("")
+    const [password,setPassword]=useState("")
+    const [role,setRole]=useState(options[0].value)
+
+    const navigate = useNavigate()
+
+    const handleUsername=(e)=>{
+      setUsername(e.target.value)
+    } 
+    const handlePassword=(e)=>{
+      setPassword(e.target.value)
+    } 
+    const handleRole=(e)=>{
+      console.log(e)
+      setRole(e)
+    } 
 
 
-
-export default function Login(){
-
-    const [formData, setFormData] = useState({
-        admNo: '',
-        password: '',
-      })
-      const { admNo, password } = formData
-      const navigate = useNavigate()
-      const dispatch = useDispatch()
-
-      const { user, isLoading, isError, isSuccess, message } = useSelector(
-        (state) => state.auth
-      )
+     function handleSubmit(e) {
+      e.preventDefault()
+      const username=e.target[1].value
+      const   password =e.target[2].value
+      const rl = !!role ? role.value : "STUDENT"
+      
+      if (username && password && rl) {
         
-      useEffect(() => {
-        if (isError) {
-        }
-    
-        if (isSuccess || user) {
-          navigate('/home')
-        }
-    
-        dispatch(reset())
-      }, [user, isError, isSuccess, message, navigate, dispatch])
-
-      const onChange = (e) => {
-        setFormData((prevState) => ({
-          ...prevState,
-          [e.target.name]: e.target.value,
-        }))
+          props.login(username, password,rl)
+          
       }
+  }
 
-      const onSubmit=(e)=>{
-        e.preventDefault()
-        const userData = {
-            admNo,
-            password,
-        }
-        dispatch(login(userData))
-    }
     return (
         <>
         <div className=' flex w-full h-full   '>
@@ -76,18 +65,18 @@ export default function Login(){
                 <div className='flex flex-col justify-center content-start  h-[100vh] '>
                   <div className='m-auto'>
                     <h1 className='text-3xl m-3'>SIGN IN</h1>
-                    <form className='flex flex-col content-center  ' action="">
+                    <form className='flex flex-col content-center  ' action="" onSubmit={handleSubmit}>
                       <div className='m-2'>
                         <label className='p-3' htmlFor="role">Role :</label>
-                        <Select options={options} />
+                        <Select options={options} value={role} onChange={handleRole} />
                       </div>
                       <div className='m-2'>
                         <label className='p-3' htmlFor="username">Username :</label>
-                        <input className='m-auto p-3 outline-none border-b-2 border-gray-300 focus:border-black' type="text" name="username" id="username" placeholder='User Name' />
+                        <input value={username} onChange={handleUsername} className='m-auto p-3 outline-none border-b-2 border-gray-300 focus:border-black' type="text" name="username" id="username" placeholder='User Name' />
                       </div>
                       <div className='m-2'>
                         <label className='p-3' htmlFor="password">Password :</label>
-                        <input className='m-auto p-3 outline-none  border-b-2 border-gray-300 focus:border-black' type="password" id='password' placeholder='Password' />
+                        <input value={password} onChange={handlePassword} className='m-auto p-3 outline-none  border-b-2 border-gray-300 focus:border-black' type="password" id='password' placeholder='Password' />
                       </div>
                       <button className='px-2 py-1  bg-black text-white w-24 rounded-md mt-4  self-center' type="submit">LOG IN</button>
                     </form>
@@ -98,3 +87,15 @@ export default function Login(){
         </>
     )
 }
+
+function mapState(state) {
+  const { loggingIn } = state.authentication;
+  return { loggingIn };
+}
+
+const actionCreators = {
+  login: userActions.login,
+  logout: userActions.logout
+};
+
+export default connect(mapState, userActions)(Login)
